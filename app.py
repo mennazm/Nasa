@@ -4,6 +4,15 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 import uvicorn
+import os
+
+# ------------------------
+# Environment Configuration
+# ------------------------
+ENVIRONMENT = os.getenv("ENVIRONMENT", "development")
+API_TITLE = os.getenv("API_TITLE", "NASA Weather Prediction API")
+API_VERSION = os.getenv("API_VERSION", "1.0.0")
+DEBUG = os.getenv("DEBUG", "true").lower() == "true"
 
 # ------------------------
 # Load models and features
@@ -17,7 +26,11 @@ feature_cols_rain = joblib.load("feature_cols_rain.pkl")
 # ------------------------
 # FastAPI app
 # ------------------------
-app = FastAPI()
+app = FastAPI(
+    title=API_TITLE,
+    version=API_VERSION,
+    description="AI-powered weather prediction API for temperature and rainfall forecasting"
+)
 
 def preprocess_input(date_str, region):
     """
@@ -79,6 +92,5 @@ def predict(date: str, region: str):
     }
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=port, debug=DEBUG)

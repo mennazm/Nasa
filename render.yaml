@@ -7,3 +7,11 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.16
+      - key: ENVIRONMENT
+        value: production
+      - key: API_TITLE
+        value: NASA Weather Prediction API
+      - key: API_VERSION
+        value: "1.0.0"
+      - key: DEBUG
+        value: "false"
