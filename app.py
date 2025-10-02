@@ -32,6 +32,14 @@ app = FastAPI(
     description="AI-powered weather prediction API for temperature and rainfall forecasting"
 )
 
+@app.get("/")
+def health_check():
+    return {"status": "healthy", "message": "NASA Weather API is running"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
 def preprocess_input(date_str, region):
     """
     Preprocess user input (date + region) -> features DataFrame

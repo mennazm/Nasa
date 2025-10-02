@@ -2,15 +2,17 @@ services:
   - type: web
     name: nasa-weather-api
     env: python
+    region: oregon
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python app.py
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.16
+        value: "3.9"
       - key: ENVIRONMENT
         value: production
       - key: API_TITLE
-        value: NASA Weather Prediction API
+        value: "NASA Weather Prediction API"
       - key: API_VERSION
         value: "1.0.0"
       - key: DEBUG
